@@ -1,0 +1,1 @@
+{"articles":{ "Posts":[ {"title":"Channel migration tool","path":"posts/2015/03/channel-migration-tool/index.html","excerpt":"\" Channel migration tool assess annual erosion rate by application of Dynamic Time Warping method (as implemented in R dtw package\\u2026\""}]}}

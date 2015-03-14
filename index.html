@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="generator" content="o-blog v2.0"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css" rel="stylesheet" />
+    <link href="./style/css/my.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+    <script src="./style/js/my.js"></script>
+  </head>
+  <body>
+    <div id="spinner" style="width:100%;height:100%;position:fixed;top:0;bottom:0;left:0;right:0;margin:auto;z-index:999998;background-color:rgba(0,0,0,0.5);">
+      <div id="ob-spinner" style="width:100px;height:100px;position:fixed;top:0;bottom:0;left:0;right:0;margin:auto;z-index:999999;background-color:rgba(127,127,127,0.5);"></div>
+      <script src="./style/js/spin.min.js"></script>
+      <script>
+	var ob_spinner = new Spinner({color: '#bbb'}).spin(document.getElementById('ob-spinner'));
+      </script>
+    </div>
+
+
+    <div class="ob-navbar-container">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="navbar-header">
+	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".ob-navbar">
+	  <span class="sr-only">Toggle navigation</span>
+	  <span class="icon-bar"></span>
+	  <span class="icon-bar"></span>
+	  <span class="icon-bar"></span>
+	</button>
+      </div>
+      <a class="navbar-brand" href="./index.html">QGIS processing tools</a>
+      <div class="collapse navbar-collapse ob-navbar">
+	<ul class="org-ul">
+<li><a href="#"><i class="glyphicon glyphicon-book icon-white"></i> Tools</a>
+<ul class="org-ul">
+<li><a href="./posts/2015/03/channel-migration-tool.html">Channel Migration</a>
+</li>
+<li></li>
+<li><a href="./faq.html">FAQ</a>
+</li>
+<li></li>
+<li><a href="./bug-report.html">Bug report</a>
+</li>
+</ul>
+</li>
+
+<li><a href="#"><i class="glyphicon glyphicon-file icon-white"></i> Posts</a>
+<ul class="org-ul">
+<li><a href="./posts/2015/03/channel-migration-tool/index.html">Channel migration tool</a>
+</li>
+<li><a href="./nil"></a>
+</li>
+<li><a href="./nil"></a>
+</li>
+<li><a href="./nil"></a>
+</li>
+<li><a href="./nil"></a>
+</li>
+</ul>
+</li>
+
+<li><a href="#"><i class="glyphicon glyphicon-tags icon-white"></i> Tags</a>
+<ul class="org-ul">
+<li><a href="./tags/index.html"><i class="glyphicon glyphicon-tags icon-white"></i> Cloud</a>
+</li>
+<li><a href="./tags.html"><i class="glyphicon glyphicon-tags icon-white"></i> Details</a>
+</li>
+</ul>
+</li>
+
+<li><a href="./archives.html"><i class="glyphicon glyphicon-list icon-white"></i> Archives</a>
+</li>
+
+<li><a href="./index.xml"><i class="glyphicon glyphicon-rss icon-white"></i> RSS</a>
+</li>
+
+<li><a href="./changelog.html"><i class="glyphicon glyphicon-pencil icon-white"></i> Changelog</a>
+</li>
+</ul>
+
+	<div class="ob-share pull-right">
+  <ul>
+    
+    
+    
+
+  </ul>
+</div>
+
+
+      </div>
+    </nav>
+
+    <div class="subnav subnav-fixed visible-desktop">
+      <div class="container">
+	<ul class="breadcrumb">
+  <li><a href="./index.html">Home</a> <span class="divider"></span></li>
+  
+  </ul>
+
+      </div>
+    </div>
+    </div>
+    
+    <div id="page" class="container">
+
+<article>
+  <div class="article-content">
+    <p>
+<div class="row">
+</p>
+
+<p>
+<div class="col-md-8">
+</p>
+
+<p>
+<div class="jumbotron">
+</p>
+<h1>QGIS processing tools</h1>
+
+<p>
+This is my collection of <a href="http://www.qgis.org">QGIS</a> <a href="http://docs.qgis.org/2.6/en/docs/user_manual/processing/index.html">processing</a> tools.
+</div>
+</p>
+
+<h1 style="font-size: 500%;">Quick start guide</h1>
+
+<p>
+</div>
+</p>
+
+<p>
+<div class="col-md-4">
+</p>
+
+
+<div class="hero-unit" style="font-size: 200%;">
+
+<p>
+<a href="./tools.html"><i class="glyphicon glyphicon-cog icon-white"></i> Tools</a>
+</p>
+
+<p>
+<a href="https://github.com/mlt/QGIS-Processing-tools"><i class="glyphicon glyphicon-github-sign icon-white"></i> Github</a>
+</p>
+
+<p>
+<a href="./bug-report.html"><i class="glyphicon glyphicon-fire icon-white"></i> Bug report</a>
+</p>
+
+
+</div>
+
+<p>
+</div>
+</p>
+
+<p>
+</div>
+</p>
+
+<div id="outline-container-sec-1" class="outline-1">
+<h1 id="sec-1">Setup</h1>
+<div class="outline-text-1" id="text-1">
+<p>
+First you need to have <a href="http://www.qgis.org">QGIS</a> installed (tested
+with version 2.8 on 64 bit Windows 7)
+and <a href="http://www.r-project.org/">R Project</a> (tested with version
+3.0.3, other <i>might</i> work as well). The preferred way of installing
+QGIS on Windows is via OSGeo4W advanced installer.
+</p>
+
+<p>
+If these are the only scripts you are using, start by cloning the <i>git</i> repository from <a href="http://github.com">Github</a>.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-bash">cd ~/.qgis2/processing
+git clone https://github.com/mlt/QGIS-Processing-tools.git .
+</pre>
+</div>
+
+<p>
+Alternatively download <a href="https://github.com/mlt/QGIS-Processing-tools/archive/master.zip">zip</a> file and unpack it there.
+</p>
+</div>
+</div>
+
+  </div>
+</article>
+      </div>
+      <div id="footer">
+	<div class="container">
+	  <div class="row">
+	    <nav class="col-md-3">
+	      <h1>About</h1>
+	      <!-- about -->
+	      <p>
+Collection of custom QGIS processing tools.
+</p>
+
+	      <!-- /about -->
+	    </nav>
+	    <nav id="links" class="col-md-3">
+	      <h1>Links</h1>
+	      <!-- Navigation Footer -->
+	      <ul class="org-ul">
+<li><a href="./index.html"><i class="glyphicon glyphicon-home icon-white"></i> Home</a>
+</li>
+
+<li><a href="./posts/2015/03/channel-migration-tool/index.html"><i class="glyphicon glyphicon-file icon-white"></i> Latest post</a>
+</li>
+
+<li><a href="./tags.html"><i class="glyphicon glyphicon-tags icon-white"></i> Tags</a>
+</li>
+
+<li><a href="./archives.html"><i class="glyphicon glyphicon-list icon-white"></i> Archives</a>
+</li>
+
+<li><a href="./index.xml"><i class="glyphicon glyphicon-rss icon-white"></i> RSS</a>
+</li>
+</ul>
+
+	      <!-- Navigation Footer -->
+	    </nav>
+	    <nav id="archives" class="col-md-3">
+	      <h1><a href="./archives.html">Archives</a></h1>
+	      <div>
+<h6><a href="./posts/index.html">Posts</a></h6>
+<span class="ob-articles" data-source="./articles.js" data-path-to-root="." data-category="tips"/>
+</div>
+
+	    </nav>
+	    <nav class="tags col-md-3">
+	      <h1><a href="./tags/index.html">Tags</a></h1>
+	      <span class="ob-tagcloud" data-source="./tags.js" data-path-to-root="."/>
+	    </nav>
+	  </div>
+	</div>
+	<div class="copyright" style="text-align: center;">
+	  <!-- copyright -->
+	  <p>
+Copyright © 2008-2012 <a href="mailto:mlt%20(at)%20gmx.us">Mikhail Titov</a>. Published under the therm of the
+<a href="http://creativecommons.org/licenses/by-nc-sa/2.0/fr/">Creative Commons Attribution-Noncommercial-Share Alike 2.0 License</a>.
+</p>
+
+	  <p>Powered by <a href="https://github.com/renard/o-blog">o-blog</a>.</p>
+	</div>
+      </div>
+      <div class="ob-script-container">
+      <script type="text/javascript">
+      	var path_to_root = ".";
+	var ob_this_page = "index.html";
+      </script>
+      <script src="./style/js/o-blog.min.js"></script>
+      <!-- <script src="./style/jquery-2.1.1.min.js"></script> -->
+      <!-- <script src="./style/jquery.equalizer.min.js"></script> -->
+      <!-- <script src="./style/bootstrap/js/bootstrap.min.js"></script> -->
+      <!-- <script src="./style/o-blog-bootstrap.min.js"></script> -->
+      <!-- <script type="text/javascript"> -->
+      <!-- 	$(document).ready(function() { -->
+      <!--   $("head").append([ -->
+      <!-- 	'<link href="./style/bootstrap/css/bootstrap.css" rel="stylesheet">', -->
+      <!-- 	'<link href="./style/font-awesome/css/font-awesome.min.css" rel="stylesheet">']) -->
+      <!-- 	}); -->
+      <!-- </script> -->
+      <script type="text/javascript">
+	$(document).ready(function() {
+	$("head").append([ 
+      	'<link href="./style/css/o-blog.min.css" rel="stylesheet">'])
+	});
+      </script>
+<!--       Lisp error in nil: (void-variable --) -->
+<!--       Lisp error in nil: (void-variable --) -->
+<!--       Lisp error in nil: (void-variable --) -->
+<!--       Lisp error in nil: (void-variable --) -->
+<!--       Lisp error in nil: (void-variable --) -->
+      </div>
+</body>
+</html>
+
