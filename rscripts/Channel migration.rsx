@@ -76,8 +76,8 @@ out <- lapply(seq_along(Original), function(iLine) {
                         m_to=to.df[alignment$index2, 'm'],
                         fr_from=from.df[alignment$index1, 'fr'],
                         fr_to=to.df[alignment$index2, 'fr'],
-                        Shape_length=SpatialLinesLengths(sl, longlat=FALSE))
-    sl.df$rate <- sl.df$Shape_length/Years
+                        migration=SpatialLinesLengths(sl, longlat=FALSE))
+    sl.df$rate <- sl.df$migration/Years
     rownames(sl.df) <- cLines+i
     cLines <<- cLines+length(alignment$index1)
 
