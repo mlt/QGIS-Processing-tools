@@ -1,21 +1,19 @@
 ##Vector processing=group
-##showplots
 ##Original=vector
 ##Final=vector
 ##Years=number 1
-##Output=output vector
+##Migration=output vector
 ##spar=number .4
-##Min_curvature=number 1e-3
-##Step_pattern=string symmetricP2
+##Curvature_multiplier=number 1e5
+#Min_curvature=number 1e-3
+##Step_pattern=string symmetricP05
 ##Step=number 25
 
 library(dtw)
 library(lattice)
 
-stopifnot(proj4string(Original) ==  proj4string(Final))
-
-from.pts <- coordinates(Original)[[1]][[1]]
-to.pts <- coordinates(Final)[[1]][[1]]
+stopifnot(identicalCRS(Original, Final))
+stopifnot(length(Original)==length(Final))
 
 get_curvature <- function(mtx) {
     total.length <- apply(
@@ -39,48 +37,54 @@ get_curvature <- function(mtx) {
                m = m, fr = m/max(m))
 }
 
-from.df <- get_curvature(from.pts)
-to.df <- get_curvature(to.pts)
+cLines <- -1
 
-# from.df <- subset(from.df, abs(Curvature) >= Min_curvature)
-# to.df <- subset(to.df, abs(Curvature) >= Min_curvature)
+out <- lapply(seq_along(Original), function(iLine) {
+    # No multipart features!
+    stopifnot(length(coordinates(Original)[[iLine]]) == 1,
+              length(coordinates(Final)[[iLine]]) == 1)
 
-is.open <- FALSE
-alignment <- dtw(from.df$Curvature, to.df$Curvature,
-                 step.pattern=eval(parse(text=Step_pattern)),#get(Step_pattern),
-                 open.begin=is.open, open.end=is.open)
+    from.pts <- coordinates(Original)[[iLine]][[1]]
+    to.pts <- coordinates(Final)[[iLine]][[1]]
 
-i <- seq_along(alignment$index1)
-l <- sapply(i, function(idx) {
-    Lines(
-        Line( rbind(
-            from.df[alignment$index1[idx], c('x', 'y')],
-            to.df[alignment$index2[idx], c('x', 'y')]
-        )), idx)
+    from.df <- get_curvature(from.pts)
+    to.df <- get_curvature(to.pts)
+
+    message('Performing alignment...')
+    is.open <- FALSE
+    alignment <- dtw(
+        with(from.df, data.frame(x,y,Curvature*Curvature_multiplier)),
+        with(to.df, data.frame(x,y,Curvature*Curvature_multiplier)),
+        window.type='sakoechiba',
+        window.size=if (nrow(from.df) < 50) nrow(from.df) else nrow(from.df)/10,
+        step.pattern=eval(parse(text=Step_pattern)),#get(Step_pattern),
+        open.begin=is.open, open.end=is.open)
+
+    message('Generating migration lines...')
+    i <- seq_along(alignment$index1)
+    l <- sapply(i, function(idx) {
+        Lines(
+            Line( rbind(
+                from.df[alignment$index1[idx], c('x', 'y')],
+                to.df[alignment$index2[idx], c('x', 'y')]
+            )), cLines+idx)
+    })
+    sl <- SpatialLines(l, proj4string=CRS(proj4string(Original)))
+    sl.df <- data.frame(i_from=alignment$index1, i_to=alignment$index2,
+                        refid=iLine-1, # =?= rownames(Original@data)[[iLine]]
+                        c_from=from.df[alignment$index1, 'Curvature'],
+                        c_to=to.df[alignment$index2, 'Curvature'],
+                        m_from=from.df[alignment$index1, 'm'],
+                        m_to=to.df[alignment$index2, 'm'],
+                        fr_from=from.df[alignment$index1, 'fr'],
+                        fr_to=to.df[alignment$index2, 'fr'],
+                        migration=SpatialLinesLengths(sl, longlat=FALSE))
+    sl.df$rate <- sl.df$migration/Years
+    rownames(sl.df) <- cLines+i
+    cLines <<- cLines+length(alignment$index1)
+
+    SpatialLinesDataFrame(sl, sl.df)
 })
-sl <- SpatialLines(l, proj4string=CRS(proj4string(Original)))
-sl.df <- data.frame(i_from=alignment$index1, i_to=alignment$index2,
-                    c_from=from.df[alignment$index1, 'Curvature'],
-                    c_to=to.df[alignment$index2, 'Curvature'],
-                    len=SpatialLinesLengths(sl, longlat=FALSE))
-sl.df$rate <- sl.df$len/Years
-sl.df$bend <- NA
-bend <- 0
-last.from <- 0
-last.to <- 0
-ready <- TRUE
-for(i in seq_len(nrow(sl.df))) {
-  if (abs(sl.df[i, 'c_from']) > Min_curvature && sl.df[i, 'c_from']*last.from>0 ||
-      abs(sl.df[i, 'c_to']) > Min_curvature && sl.df[i, 'c_to']*last.to>0 ) {
-    sl.df[i, 'bend'] <- bend
-    ready <- TRUE
-  } else {
-    if (ready) { bend <- bend+1 }
-    ready <- FALSE
-  }
-  last.from <- sl.df[i, 'c_from']
-  last.to <- sl.df[i, 'c_to']
-}
 
-plot(bwplot(as.factor(bend) ~ rate, sl.df))
-Output <- SpatialLinesDataFrame(sl, sl.df)
+message('Merging results')
+Migration <- do.call(rbind.SpatialLinesDataFrame, out)
