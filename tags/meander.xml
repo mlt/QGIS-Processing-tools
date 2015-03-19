@@ -3,7 +3,7 @@
   <title>QGIS processing tools</title>
   <link href="http://mlt.github.io/QGIS-Processing-toolsindex.xml" rel="self" />
   <link href="http://mlt.github.io/QGIS-Processing-tools"/>
-  <updated>2015-03-19T00:28:12Z</updated>
+  <updated>2015-03-19T02:52:51Z</updated>
   <id>http://mlt.github.io/QGIS-Processing-toolsindex.xml</id>
   <entry><title type="html">How to find an optimal curvature threshold</title><author><name>nil</name></author><link href="http://mlt.github.io/QGIS-Processing-tools/posts/2015/03/how-to-find-an-optimal-curvature-threshold/index.html"/><updated>2015-03-18T23:13:00Z</updated><published>2015-03-18T23:13:00Z</published><id>posts/2015/03/how-to-find-an-optimal-curvature-threshold/index.html</id><category scheme="/tags/meander.html" term="meander" label="meander"/><category scheme="/tags/enumeration.html" term="enumeration" label="enumeration"/><category scheme="/tags/r.html" term="r" label="r"/><content type="html">&lt;p&gt;
 Consecutive span of migration lines with (either time) absolute
