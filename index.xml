@@ -3,9 +3,9 @@
   <title>QGIS processing tools</title>
   <link href="http://mlt.github.io/QGIS-Processing-toolsindex.xml" rel="self" />
   <link href="http://mlt.github.io/QGIS-Processing-tools"/>
-  <updated>2015-03-19T02:52:51Z</updated>
+  <updated>2015-03-19T16:09:15Z</updated>
   <id>http://mlt.github.io/QGIS-Processing-toolsindex.xml</id>
-  <entry><title type="html">Meanders formation</title><author><name>nil</name></author><link href="http://mlt.github.io/QGIS-Processing-tools/posts/2015/03/meanders-formation/index.html"/><updated>2015-03-18T23:46:00Z</updated><published>2015-03-18T23:46:00Z</published><id>posts/2015/03/meanders-formation/index.html</id><category scheme="/tags/channel-migration.html" term="channel migration" label="channel migration"/><category scheme="/tags/r.html" term="r" label="r"/><content type="html">&lt;p&gt;
+  <entry><title type="html">Meanders formation</title><author><name>nil</name></author><link href="http://mlt.github.io/QGIS-Processing-tools/posts/2015/03/meanders-formation/index.html"/><updated>2015-03-18T23:14:00Z</updated><published>2015-03-18T23:14:00Z</published><id>posts/2015/03/meanders-formation/index.html</id><category scheme="/tags/channel-migration.html" term="channel migration" label="channel migration"/><category scheme="/tags/r.html" term="r" label="r"/><content type="html">&lt;p&gt;
 Accurate channel digitizing implies following actual flow path
 including either emerging meanders in recent data or oxbow lakes that
 used to be a channel in the past. Connecting such segments may give a
@@ -118,7 +118,7 @@ meanders are shown in Figure &lt;a href="#fig-qgis-screenshot"&gt;3&lt;/a&gt;.
 &lt;/p&gt;
 &lt;p&gt;&lt;span class="figure-number"&gt;Figure 3:&lt;/span&gt; Example of enumerated meanders highlighted with different colors&lt;/p&gt;
 &lt;/div&gt;
-</content></entry><entry><title type="html">On effect of curvature multiplier</title><author><name>nil</name></author><link href="http://mlt.github.io/QGIS-Processing-tools/posts/2015/03/on-effect-of-curvature-multiplier/index.html"/><updated>2015-03-18T23:13:00Z</updated><published>2015-03-18T23:13:00Z</published><id>posts/2015/03/on-effect-of-curvature-multiplier/index.html</id><category scheme="/tags/dtw.html" term="dtw" label="dtw"/><category scheme="/tags/r.html" term="r" label="r"/><content type="html">&lt;p&gt;
+</content></entry><entry><title type="html">On effect of curvature multiplier</title><author><name>nil</name></author><link href="http://mlt.github.io/QGIS-Processing-tools/posts/2015/03/on-effect-of-curvature-multiplier/index.html"/><updated>2015-03-18T23:12:00Z</updated><published>2015-03-18T23:12:00Z</published><id>posts/2015/03/on-effect-of-curvature-multiplier/index.html</id><category scheme="/tags/dtw.html" term="dtw" label="dtw"/><category scheme="/tags/r.html" term="r" label="r"/><content type="html">&lt;p&gt;
 DTW alignment of original &amp;amp; final channel centerlines is performed
 using Euclidean distance matrix for corresponding spline points augmented with the
 third dimension of curvature at those points. That is for each point
@@ -153,17 +153,17 @@ Step &lt;span class="org-constant"&gt;&amp;lt;-&lt;/span&gt; 25
 &lt;span class="org-constant"&gt;source&lt;/span&gt;(&lt;span class="org-string"&gt;'~/.qgis2/processing/rscripts/Channel migration.rsx'&lt;/span&gt;)
 &lt;span class="org-function-name"&gt;plotResult&lt;/span&gt; &lt;span class="org-constant"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="org-keyword"&gt;function&lt;/span&gt;() {
   zz &lt;span class="org-constant"&gt;&amp;lt;-&lt;/span&gt; subset(Migration, .35 &amp;lt; fr_from &amp;amp; fr_from &amp;lt; .39, drop=&lt;span class="org-type"&gt;TRUE&lt;/span&gt;)
-  plot(Original, xlim=bbox(zz)[&lt;span class="org-string"&gt;'x'&lt;/span&gt;,], ylim=bbox(zz)[&lt;span class="org-string"&gt;'y'&lt;/span&gt;,], col=&lt;span class="org-string"&gt;'red'&lt;/span&gt;)
-  lines(Final, col=&lt;span class="org-string"&gt;'green'&lt;/span&gt;)
+  plot(Original, xlim=bbox(zz)[&lt;span class="org-string"&gt;'x'&lt;/span&gt;,], ylim=bbox(zz)[&lt;span class="org-string"&gt;'y'&lt;/span&gt;,], col=&lt;span class="org-string"&gt;'IndianRed1'&lt;/span&gt;, lwd=2)
+  lines(Final, col=&lt;span class="org-string"&gt;'ForestGreen'&lt;/span&gt;, lwd=2)
   &lt;span class="org-keyword"&gt;for&lt;/span&gt;(l &lt;span class="org-keyword"&gt;in&lt;/span&gt; coordinates(zz)[seq(1,length(zz),6)])
-    do.call(&lt;span class="org-string"&gt;'arrows'&lt;/span&gt;, c(as.list(t(l[[1]])), length=.05, col=&lt;span class="org-string"&gt;'grey60'&lt;/span&gt;))
+    do.call(&lt;span class="org-string"&gt;'arrows'&lt;/span&gt;, c(as.list(t(l[[1]])), length=.05, col=&lt;span class="org-string"&gt;'gray30'&lt;/span&gt;))
   grid(); axis(1); axis(2)
 }
 layout(matrix(1:2, nrow=1))
-plotResult(); title(&lt;span class="org-string"&gt;'a)'&lt;/span&gt;)
+plotResult(); title(&lt;span class="org-string"&gt;'a) downstream migration'&lt;/span&gt;)
 Curvature_multiplier &lt;span class="org-constant"&gt;&amp;lt;-&lt;/span&gt; 0
 &lt;span class="org-constant"&gt;source&lt;/span&gt;(&lt;span class="org-string"&gt;'~/.qgis2/processing/rscripts/Channel migration.rsx'&lt;/span&gt;)
-plotResult(); title(&lt;span class="org-string"&gt;'b)'&lt;/span&gt;)
+plotResult(); title(&lt;span class="org-string"&gt;'b) lateral migration'&lt;/span&gt;)
 &lt;/pre&gt;
 &lt;/div&gt;
 
