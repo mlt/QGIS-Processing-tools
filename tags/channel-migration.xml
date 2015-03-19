@@ -1,51 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>QGIS processing tools</title>
-  <link href="https://mlt.github.io/QGIS-Processing-toolsindex.xml" rel="self" />
-  <link href="https://mlt.github.io/QGIS-Processing-tools"/>
-  <updated>2015-03-13T20:04:00Z</updated>
-  <id>https://mlt.github.io/QGIS-Processing-toolsindex.xml</id>
-  <entry><title type="html">Channel migration tool</title><author><name>nil</name></author><link href="https://mlt.github.io/QGIS-Processing-tools/posts/2015/03/channel-migration-tool/index.html"/><updated>2015-03-14T16:13:00Z</updated><published>2015-03-14T16:13:00Z</published><id>posts/2015/03/channel-migration-tool/index.html</id><category scheme="/tags/channel-migration.html" term="channel migration" label="channel migration"/><category scheme="/tags/erosion.html" term="erosion" label="erosion"/><category scheme="/tags/r.html" term="r" label="r"/><category scheme="/tags/dtw.html" term="dtw" label="dtw"/><content type="html">&lt;p&gt;
-Channel migration tool assess annual erosion rate by application of
-&lt;a href="http://en.wikipedia.org/wiki/Dynamic_time_warping"&gt;Dynamic Time Warping&lt;/a&gt; method (as implemented in R &lt;a href="http://cran.r-project.org/package=dtw"&gt;dtw&lt;/a&gt; package) to
-aligned &lt;a href="http://en.wikipedia.org/wiki/Curvature#Signed_curvature"&gt;signed curvature&lt;/a&gt; of a channel. Smooth
-spline is used to derive curvature as a parametric function of
-position along the channel (from 0 to 1).
+  <link href="http://mlt.github.io/QGIS-Processing-toolsindex.xml" rel="self" />
+  <link href="http://mlt.github.io/QGIS-Processing-tools"/>
+  <updated>2015-03-19T00:28:12Z</updated>
+  <id>http://mlt.github.io/QGIS-Processing-toolsindex.xml</id>
+  <entry><title type="html">Meanders formation</title><author><name>nil</name></author><link href="http://mlt.github.io/QGIS-Processing-tools/posts/2015/03/meanders-formation/index.html"/><updated>2015-03-18T23:46:00Z</updated><published>2015-03-18T23:46:00Z</published><id>posts/2015/03/meanders-formation/index.html</id><category scheme="/tags/channel-migration.html" term="channel migration" label="channel migration"/><category scheme="/tags/r.html" term="r" label="r"/><content type="html">&lt;p&gt;
+Accurate channel digitizing implies following actual flow path
+including either emerging meanders in recent data or oxbow lakes that
+used to be a channel in the past. Connecting such segments may give a
+false impression of tremendous channel migration. These cases can be
+detected by analyzing curvature changes.
 &lt;/p&gt;
 
 &lt;p&gt;
-This is essentially an alternative to
+We are likely dealing with formation or collapse of a meander when the
+largest curvature changes between past and recent data in about at
+least an order of magnitude and either curvature is large enough for a
+visible meander.
 &lt;/p&gt;
-&lt;ul class="org-ul"&gt;
-&lt;li&gt;&lt;a href="http://www.nced.umn.edu/content/stream-restoration-toolbox"&gt;Planform Statistics&lt;/a&gt; tool
-&lt;/li&gt;
-&lt;li&gt;&amp;#x2026;
-&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class="alert alert-info"&gt;&lt;p class="alert-heading"&gt;Information&lt;/p&gt;
 
 &lt;p&gt;
-This method uses DTW that matches peaks in curvature and it &lt;b&gt;does not&lt;/b&gt;
-rely on spatial proximity. Thus erosion rates might be overestimated
-comparing to other tools.
+The following plot might give you an idea how to pinpoint such cases.
 &lt;/p&gt;
 
+&lt;div class="org-src-container"&gt;
+
+&lt;pre class="src src-R" id="oxbow"&gt;&lt;span class="org-constant"&gt;library&lt;/span&gt;(rgdal)
+&lt;span class="org-constant"&gt;library&lt;/span&gt;(ggplot2)
+&lt;span class="org-constant"&gt;library&lt;/span&gt;(grid)
+Original &lt;span class="org-constant"&gt;&amp;lt;-&lt;/span&gt; readOGR(&lt;span class="org-string"&gt;".."&lt;/span&gt;, &lt;span class="org-string"&gt;"lower_mn_1938"&lt;/span&gt;)
+Final &lt;span class="org-constant"&gt;&amp;lt;-&lt;/span&gt; readOGR(&lt;span class="org-string"&gt;".."&lt;/span&gt;, &lt;span class="org-string"&gt;"lower_mn_2009"&lt;/span&gt;)
+Years &lt;span class="org-constant"&gt;&amp;lt;-&lt;/span&gt; 71
+spar &lt;span class="org-constant"&gt;&amp;lt;-&lt;/span&gt; 0.4
+Step_pattern &lt;span class="org-constant"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="org-string"&gt;'symmetricP05'&lt;/span&gt;
+Curvature_multiplier &lt;span class="org-constant"&gt;&amp;lt;-&lt;/span&gt; 1e5
+Step &lt;span class="org-constant"&gt;&amp;lt;-&lt;/span&gt; 25
+&lt;span class="org-constant"&gt;source&lt;/span&gt;(&lt;span class="org-string"&gt;'~/.qgis2/processing/rscripts/Channel migration.rsx'&lt;/span&gt;)
+Min_curvature &lt;span class="org-constant"&gt;&amp;lt;-&lt;/span&gt; 1e-3
+&lt;span class="org-constant"&gt;source&lt;/span&gt;(&lt;span class="org-string"&gt;'~/.qgis2/processing/rscripts/Meander enumeration.rsx'&lt;/span&gt;)
+&lt;span class="org-constant"&gt;source&lt;/span&gt;(&lt;span class="org-string"&gt;'~/.qgis2/processing/rscripts/Meander summary.rsx'&lt;/span&gt;)
+transp &lt;span class="org-constant"&gt;&amp;lt;-&lt;/span&gt; element_rect(fill=&lt;span class="org-string"&gt;'transparent'&lt;/span&gt;)
+qplot(abs(c_from)+abs(c_to), log10(abs(c_from/c_to)), size=len, data=Meanders@data) +
+  annotation_custom(grob=rectGrob(gp=gpar(fill=&lt;span class="org-string"&gt;'gray60'&lt;/span&gt;,alpha=.2)), xmin=.005, ymin=-3, xmax=.05, ymax=-1) +
+  annotation_custom(grob=rectGrob(gp=gpar(fill=&lt;span class="org-string"&gt;'gray60'&lt;/span&gt;,alpha=.2)), xmin=.005, ymin=1, xmax=.05, ymax=3) +
+  annotate(&lt;span class="org-string"&gt;'text'&lt;/span&gt;, .02, 1.5, label=&lt;span class="org-string"&gt;'collapsing meanders'&lt;/span&gt;, size=8) +
+  annotate(&lt;span class="org-string"&gt;'text'&lt;/span&gt;, .02, -1.5, label=&lt;span class="org-string"&gt;'emergin meanders'&lt;/span&gt;, size=8) +
+  theme_bw() %+replace%
+  theme(plot.background=element_rect(fill=&lt;span class="org-string"&gt;'transparent'&lt;/span&gt;, colour=&lt;span class="org-string"&gt;'transparent'&lt;/span&gt;),
+        legend.background=transp, legend.key=transp, panel.background=transp)
+&lt;/pre&gt;
 &lt;/div&gt;
 
 
-
 &lt;div class="figure"&gt;
-&lt;p&gt;&lt;img src="../../../.././posts/2015/03/channel-migration-tool/index/qgis-processing-channel_migration-demo-screenshot.jpg" alt="qgis-processing-channel_migration-demo-screenshot.jpg" width="600px" /&gt;
+&lt;p&gt;&lt;img src="../../../.././posts/2015/03/meanders-formation/index/oxbow.svg" alt="oxbow.svg" /&gt;
 &lt;/p&gt;
-&lt;p&gt;&lt;span class="figure-number"&gt;Figure 1:&lt;/span&gt; Channel migration by matching curvature&lt;/p&gt;
-&lt;/div&gt;
-
-
-&lt;div class="figure"&gt;
-&lt;p&gt;&lt;img src="../../../.././posts/2015/03/channel-migration-tool/index/qgis-processing-channel_migration-demo-screenshot-bends.jpg" alt="qgis-processing-channel_migration-demo-screenshot-bends.jpg" width="600px" /&gt;
-&lt;/p&gt;
-&lt;p&gt;&lt;span class="figure-number"&gt;Figure 2:&lt;/span&gt; Automatic meander enumeration&lt;/p&gt;
+&lt;p&gt;&lt;span class="figure-number"&gt;Figure 1:&lt;/span&gt; Change in maximum curvature for meanders&lt;/p&gt;
 &lt;/div&gt;
 </content></entry>
 </feed>

@@ -5,11 +5,9 @@
     <title>QGIS processing tools</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="generator" content="o-blog v2.0"/>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css" rel="stylesheet" />
+    <link href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css" rel="stylesheet" />
     <link href="../../style/css/my.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
-    <script src="../../style/js/my.js"></script>
+    <link href="../../style/css/zenburn.css" rel="stylesheet" />
   </head>
   <body>
     <div id="spinner" style="width:100%;height:100%;position:fixed;top:0;bottom:0;left:0;right:0;margin:auto;z-index:999998;background-color:rgba(0,0,0,0.5);">
@@ -36,7 +34,7 @@
 	<ul class="org-ul">
 <li><a href="#"><i class="glyphicon glyphicon-book icon-white"></i> Tools</a>
 <ul class="org-ul">
-<li><a href="../../posts/2015/03/channel-migration-tool.html">Channel Migration</a>
+<li><a href="../../channel-migration.html">Channel Migration</a>
 </li>
 <li></li>
 <li><a href="../../faq.html">FAQ</a>
@@ -49,11 +47,11 @@
 
 <li><a href="#"><i class="glyphicon glyphicon-file icon-white"></i> Posts</a>
 <ul class="org-ul">
-<li><a href="../../posts/2015/03/channel-migration-tool/index.html">Channel migration tool</a>
+<li><a href="../../posts/2015/03/meanders-formation/index.html">Meanders formation</a>
 </li>
-<li><a href="../../nil"></a>
+<li><a href="../../posts/2015/03/how-to-find-an-optimal-curvature-threshold/index.html">How to find an optimal curvature threshold</a>
 </li>
-<li><a href="../../nil"></a>
+<li><a href="../../posts/2015/03/on-effect-of-curvature-multiplier/index.html">On effect of curvature multiplier</a>
 </li>
 <li><a href="../../nil"></a>
 </li>
@@ -74,7 +72,7 @@
 <li><a href="../../archives.html"><i class="glyphicon glyphicon-list icon-white"></i> Archives</a>
 </li>
 
-<li><a href="../../index.xml"><i class="glyphicon glyphicon-rss icon-white"></i> RSS</a>
+<li><a href="../../index.xml"><i class="glyphicon glyphicon-rss fa fa-rss icon-white"></i> RSS</a>
 </li>
 
 <li><a href="../../changelog.html"><i class="glyphicon glyphicon-pencil icon-white"></i> Changelog</a>
@@ -112,7 +110,7 @@
     <nav class="archives">
       <ul class="year 2015">
   <li><a href="../../posts/2015/03/index.html">03</a><ul class="month 2015 3">
-  <li>14 <a href="../../posts/2015/03/channel-migration-tool/index.html">Channel migration tool</a></li>
+  <li>18 <a href="../../posts/2015/03/meanders-formation/index.html">Meanders formation</a></li><li>18 <a href="../../posts/2015/03/how-to-find-an-optimal-curvature-threshold/index.html">How to find an optimal curvature threshold</a></li><li>18 <a href="../../posts/2015/03/on-effect-of-curvature-multiplier/index.html">On effect of curvature multiplier</a></li>
 </ul>
 </li>
 </ul>
@@ -140,7 +138,7 @@ Collection of custom QGIS processing tools.
 <li><a href="../../index.html"><i class="glyphicon glyphicon-home icon-white"></i> Home</a>
 </li>
 
-<li><a href="../../posts/2015/03/channel-migration-tool/index.html"><i class="glyphicon glyphicon-file icon-white"></i> Latest post</a>
+<li><a href="../../posts/2015/03/meanders-formation/index.html"><i class="glyphicon glyphicon-file icon-white"></i> Latest post</a>
 </li>
 
 <li><a href="../../tags.html"><i class="glyphicon glyphicon-tags icon-white"></i> Tags</a>
@@ -149,7 +147,7 @@ Collection of custom QGIS processing tools.
 <li><a href="../../archives.html"><i class="glyphicon glyphicon-list icon-white"></i> Archives</a>
 </li>
 
-<li><a href="../../index.xml"><i class="glyphicon glyphicon-rss icon-white"></i> RSS</a>
+<li><a href="../../index.xml"><i class="glyphicon glyphicon-rss fa fa-rss icon-white"></i> RSS</a>
 </li>
 </ul>
 
@@ -185,7 +183,10 @@ Copyright © 2008-2012 <a href="mailto:mlt%20(at)%20gmx.us">Mikhail Titov</a>. P
 	var ob_this_page = "posts/2015/index.html";
       </script>
       <script src="../../style/js/o-blog.min.js"></script>
-      <!-- <script src="../../style/jquery-2.1.1.min.js"></script> -->
+      <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
+      <script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js"></script>
+      <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script src="../../style/js/my.js"></script>
       <!-- <script src="../../style/jquery.equalizer.min.js"></script> -->
       <!-- <script src="../../style/bootstrap/js/bootstrap.min.js"></script> -->
       <!-- <script src="../../style/o-blog-bootstrap.min.js"></script> -->
@@ -202,7 +203,15 @@ Copyright © 2008-2012 <a href="mailto:mlt%20(at)%20gmx.us">Mikhail Titov</a>. P
       	'<link href="../../style/css/o-blog.min.css" rel="stylesheet">'])
 	});
       </script>
-<!--       Lisp error in nil: (void-variable --) -->
+      <script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-60824001-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
 <!--       Lisp error in nil: (void-variable --) -->
 <!--       Lisp error in nil: (void-variable --) -->
 <!--       Lisp error in nil: (void-variable --) -->

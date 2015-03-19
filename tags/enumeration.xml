@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>QGIS processing tools</title>
+  <link href="http://mlt.github.io/QGIS-Processing-toolsindex.xml" rel="self" />
+  <link href="http://mlt.github.io/QGIS-Processing-tools"/>
+  <updated>2015-03-19T00:28:12Z</updated>
+  <id>http://mlt.github.io/QGIS-Processing-toolsindex.xml</id>
+  <entry><title type="html">How to find an optimal curvature threshold</title><author><name>nil</name></author><link href="http://mlt.github.io/QGIS-Processing-tools/posts/2015/03/how-to-find-an-optimal-curvature-threshold/index.html"/><updated>2015-03-18T23:13:00Z</updated><published>2015-03-18T23:13:00Z</published><id>posts/2015/03/how-to-find-an-optimal-curvature-threshold/index.html</id><category scheme="/tags/meander.html" term="meander" label="meander"/><category scheme="/tags/enumeration.html" term="enumeration" label="enumeration"/><category scheme="/tags/r.html" term="r" label="r"/><content type="html">&lt;p&gt;
+Consecutive span of migration lines with (either time) absolute
+curvature, exceeding a certain threshold, define a meander. The lower
+the threshold the fewer longer meanders are detected. The higher the
+threshold, the fewer extremely bending meanders are detecting. We can
+maximize the number of detectable meanders by varying the threshold as
+shown on Figure &lt;a href="#fig-curvature-threshold"&gt;1&lt;/a&gt;.
+&lt;/p&gt;
+
+
+&lt;div id="fig-curvature-threshold" class="figure"&gt;
+&lt;p&gt;&lt;img src="../../../.././posts/2015/03/how-to-find-an-optimal-curvature-threshold/index/curvature-threshold-bends.svg" alt="curvature-threshold-bends.svg" /&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;span class="figure-number"&gt;Figure 1:&lt;/span&gt; Curvature threshold as it affects # of meanders&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p&gt;
+The following snippet will do this.
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre class="src src-R" id="migration"&gt;&lt;span class="org-constant"&gt;library&lt;/span&gt;(rgdal)
+Original &lt;span class="org-constant"&gt;&amp;lt;-&lt;/span&gt; readOGR(&lt;span class="org-string"&gt;".."&lt;/span&gt;, &lt;span class="org-string"&gt;"lower_mn_1938"&lt;/span&gt;)
+Final &lt;span class="org-constant"&gt;&amp;lt;-&lt;/span&gt; readOGR(&lt;span class="org-string"&gt;".."&lt;/span&gt;, &lt;span class="org-string"&gt;"lower_mn_2009"&lt;/span&gt;)
+Years &lt;span class="org-constant"&gt;&amp;lt;-&lt;/span&gt; 71
+spar &lt;span class="org-constant"&gt;&amp;lt;-&lt;/span&gt; 0.4
+Step_pattern &lt;span class="org-constant"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="org-string"&gt;'symmetricP05'&lt;/span&gt;
+Curvature_multiplier &lt;span class="org-constant"&gt;&amp;lt;-&lt;/span&gt; 1e5
+Step &lt;span class="org-constant"&gt;&amp;lt;-&lt;/span&gt; 25
+&lt;span class="org-constant"&gt;source&lt;/span&gt;(&lt;span class="org-string"&gt;'~/.qgis2/processing/rscripts/Channel migration.rsx'&lt;/span&gt;)
+&lt;span class="org-function-name"&gt;ff&lt;/span&gt; &lt;span class="org-constant"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="org-keyword"&gt;function&lt;/span&gt;(Min_curvature) {
+  &lt;span class="org-constant"&gt;source&lt;/span&gt;(&lt;span class="org-string"&gt;'~/.qgis2/processing/rscripts/Meander enumeration.rsx'&lt;/span&gt;, &lt;span class="org-type"&gt;TRUE&lt;/span&gt;)
+  max(Enumerated$bend, na.rm=&lt;span class="org-type"&gt;TRUE&lt;/span&gt;)
+}
+mc &lt;span class="org-constant"&gt;&amp;lt;-&lt;/span&gt; 10^(seq(-4,-2, by=.1))
+nb &lt;span class="org-constant"&gt;&amp;lt;-&lt;/span&gt; sapply(mc, ff)
+plot(nb~mc, log=&lt;span class="org-string"&gt;'x'&lt;/span&gt;, xlab=&lt;span class="org-string"&gt;'Minimal curvature threshold'&lt;/span&gt;, ylab=&lt;span class="org-string"&gt;'Number of meanders detected'&lt;/span&gt;)
+&lt;/pre&gt;
+&lt;/div&gt;
+
+
+&lt;div id="fig-meanders-plot" class="figure"&gt;
+&lt;p&gt;&lt;img src="../../../.././posts/2015/03/how-to-find-an-optimal-curvature-threshold/index/meanders-count-threshold.svg" alt="meanders-count-threshold.svg" /&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;span class="figure-number"&gt;Figure 2:&lt;/span&gt; # of meanders as a function of curvature threshold&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p&gt;
+It is, probably, okay to use threshold value of 1e-3 as can be seen in
+Figure &lt;a href="#fig-meanders-plot"&gt;2&lt;/a&gt;. Resulting migration lines with enumerated
+meanders are shown in Figure &lt;a href="#fig-qgis-screenshot"&gt;3&lt;/a&gt;.
+&lt;/p&gt;
+
+
+&lt;div id="fig-qgis-screenshot" class="figure"&gt;
+&lt;p&gt;&lt;img src="../qgis-processing-channel_migration-demo-screenshot-bends.jpg" alt="qgis-processing-channel_migration-demo-screenshot-bends.jpg" /&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;span class="figure-number"&gt;Figure 3:&lt;/span&gt; Example of enumerated meanders highlighted with different colors&lt;/p&gt;
+&lt;/div&gt;
+</content></entry>
+</feed>

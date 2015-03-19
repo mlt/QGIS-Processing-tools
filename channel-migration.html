@@ -2,7 +2,7 @@
 <html lang="">
   <head>
     <meta charset="utf-8"/>
-    <title>Articles by tags</title>
+    <title>Channel migration tool</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="generator" content="o-blog v2.0"/>
     <link href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css" rel="stylesheet" />
@@ -96,7 +96,7 @@
       <div class="container">
 	<ul class="breadcrumb">
   <li><a href="./index.html">Home</a> <span class="divider"></span></li>
-  <li>Articles by tags</li>
+  <li>Channel migration tool</li>
   </ul>
 
       </div>
@@ -105,20 +105,128 @@
     
     <div id="page" class="container">
 
-<div class="article">
-  <div class="article-content">
-    <div>
+  <div class="article">
+  <header class="article-header">
+
+    
+    
+    <div class="jumbotron">
+      <div class="page-header">
+	<div class="pull-right">
+          <div class="qr-code">
+  <img src="http://chart.apis.google.com/chart?chs=50x50&cht=qr&chld=|0&chl=http%3A%2F%2Fmlt.github.io%2FQGIS-Processing-tools%2Fchannel-migration.html"
+       alt="qr-code" />
+</div>
+
+        </div>
+	<h1>Channel migration tool</h1>
+      </div>
       <nav>
-	<p class="lead"><a href="./tags/index.html">Tag cloud</a></p>
+	<ul class="pager">
+	  <li class="previous">&nbsp;</li><li class="next">&nbsp;</li>
+	</ul>
       </nav>
     </div>
-    <nav class="tag-detail">
-      <div class="multicolumn3">
-	<h3><a href="./tags/channel-migration.xml"><i class="fa fa-rss"></i></a> <a href="./tags/channel-migration.html">channel migration</a></h3><ul><li><a href="./posts/2015/03/meanders-formation/index.html">Meanders formation</a></li></ul><h3><a href="./tags/dtw.xml"><i class="fa fa-rss"></i></a> <a href="./tags/dtw.html">dtw</a></h3><ul><li><a href="./posts/2015/03/on-effect-of-curvature-multiplier/index.html">On effect of curvature multiplier</a></li></ul><h3><a href="./tags/enumeration.xml"><i class="fa fa-rss"></i></a> <a href="./tags/enumeration.html">enumeration</a></h3><ul><li><a href="./posts/2015/03/how-to-find-an-optimal-curvature-threshold/index.html">How to find an optimal curvature threshold</a></li></ul><h3><a href="./tags/erosion.xml"><i class="fa fa-rss"></i></a> <a href="./tags/erosion.html">erosion</a></h3><ul></ul><h3><a href="./tags/meander.xml"><i class="fa fa-rss"></i></a> <a href="./tags/meander.html">meander</a></h3><ul><li><a href="./posts/2015/03/how-to-find-an-optimal-curvature-threshold/index.html">How to find an optimal curvature threshold</a></li></ul><h3><a href="./tags/r.xml"><i class="fa fa-rss"></i></a> <a href="./tags/r.html">r</a></h3><ul><li><a href="./posts/2015/03/meanders-formation/index.html">Meanders formation</a></li><li><a href="./posts/2015/03/how-to-find-an-optimal-curvature-threshold/index.html">How to find an optimal curvature threshold</a></li><li><a href="./posts/2015/03/on-effect-of-curvature-multiplier/index.html">On effect of curvature multiplier</a></li></ul>
-      </div>
-    </nav>
-  </div>
+
+  </header>
+  <div class="article-content">
+    <p>
+Channel migration tool assess annual erosion rate by application of
+<a href="http://en.wikipedia.org/wiki/Dynamic_time_warping">Dynamic Time Warping</a> method (as implemented in R <a href="http://cran.r-project.org/package=dtw">dtw</a> package) to align
+channel centerlines. DTW distance matrix is using 2D Euclidean space
+augmented with a <a href="http://en.wikipedia.org/wiki/Curvature#Signed_curvature">signed curvature</a> of a channel. Smooth splines <i>x(t)</i> &amp;
+<i>y(t)</i> are used to derive curvature as a parametric function of position <i>t</i>
+along the channel.
+</p>
+
+<p>
+This is essentially an alternative to
+</p>
+<ul class="org-ul">
+<li><a href="http://www.nced.umn.edu/content/stream-restoration-toolbox">Planform Statistics</a> tool
+</li>
+<li>&#x2026;
+</li>
+</ul>
+
+<p>
+Prominent features are:
+</p>
+<ul class="org-ul">
+<li>fully automatic
+</li>
+<li>takes curvature into account allowing for more accurate migration estimation
+</li>
+<li>supports multiple channels processing at once (distinguished by feature ID,
+corresponding FID will go to <i>refid</i> field in the output)
+</li>
+<li>handles difficult geometries with splines and curvature accounting
+</li>
+<li>meanders enumeration
+</li>
+<li>assists in oxbow-lake related changes identification
+</li>
+</ul>
+
+
+<div class="figure">
+<p><img src="././qgis-processing-channel_migration-demo-screenshot.jpg" alt="qgis-processing-channel_migration-demo-screenshot.jpg" />
+</p>
+<p><span class="figure-number">Figure 1:</span> Channel migration by matching curvature</p>
 </div>
+
+
+<div class="figure">
+<p><img src="././qgis-processing-channel_migration-demo-screenshot-bends.jpg" alt="qgis-processing-channel_migration-demo-screenshot-bends.jpg" />
+</p>
+<p><span class="figure-number">Figure 2:</span> Automatic meander enumeration</p>
+</div>
+
+<p>
+These tools can be chained up with QGIS Processing plugin.
+</p>
+
+
+<div class="figure">
+<p><img src="././qgis-processing-model-demo-screenshot.png" alt="qgis-processing-model-demo-screenshot.png" />
+</p>
+<p><span class="figure-number">Figure 3:</span> QGIS Processing model</p>
+</div>
+
+
+<div class="figure">
+<p><img src="././qgis-processing-model-demo-dialog.png" alt="qgis-processing-model-demo-dialog.png" />
+</p>
+<p><span class="figure-number">Figure 4:</span> Dialog for a custom QGIS Processing model</p>
+</div>
+
+  </div>
+  
+  <footer class="well article-footer">
+    Last updated on <time datetime="2015-03-19T00:28:12Z"> Thursday March, 19 2015 at 00:28:12</time>.
+    <nav class="tag-cloud">
+      <h1><i class="icon-tags"></i> related tags</h1>
+      <ul>
+	<li class="label label-default small"><a href="./tags/channel-migration.html">channel migration</a></li><li class="label label-default small"><a href="./tags/erosion.html">erosion</a></li><li class="label label-default small"><a href="./tags/dtw.html">dtw</a></li><li class="label label-default small"><a href="./tags/r.html">r</a></li>
+      </ul>
+    </nav>
+  </footer>
+  </div>
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+  /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  var disqus_shortname = 'mlt-qgis-processing'; // required: replace example with your forum shortname
+
+  /* * * DON'T EDIT BELOW THIS LINE * * */
+  (function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
       </div>
       <div id="footer">
 	<div class="container">
@@ -181,7 +289,7 @@ Copyright © 2008-2012 <a href="mailto:mlt%20(at)%20gmx.us">Mikhail Titov</a>. P
       <div class="ob-script-container">
       <script type="text/javascript">
       	var path_to_root = ".";
-	var ob_this_page = "tags.html";
+	var ob_this_page = "channel-migration.html";
       </script>
       <script src="./style/js/o-blog.min.js"></script>
       <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->

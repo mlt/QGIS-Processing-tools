@@ -1,51 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>QGIS processing tools</title>
-  <link href="https://mlt.github.io/QGIS-Processing-toolsindex.xml" rel="self" />
-  <link href="https://mlt.github.io/QGIS-Processing-tools"/>
-  <updated>2015-03-13T20:04:00Z</updated>
-  <id>https://mlt.github.io/QGIS-Processing-toolsindex.xml</id>
-  <entry><title type="html">Channel migration tool</title><author><name>nil</name></author><link href="https://mlt.github.io/QGIS-Processing-tools/posts/2015/03/channel-migration-tool/index.html"/><updated>2015-03-14T16:13:00Z</updated><published>2015-03-14T16:13:00Z</published><id>posts/2015/03/channel-migration-tool/index.html</id><category scheme="/tags/channel-migration.html" term="channel migration" label="channel migration"/><category scheme="/tags/erosion.html" term="erosion" label="erosion"/><category scheme="/tags/r.html" term="r" label="r"/><category scheme="/tags/dtw.html" term="dtw" label="dtw"/><content type="html">&lt;p&gt;
-Channel migration tool assess annual erosion rate by application of
-&lt;a href="http://en.wikipedia.org/wiki/Dynamic_time_warping"&gt;Dynamic Time Warping&lt;/a&gt; method (as implemented in R &lt;a href="http://cran.r-project.org/package=dtw"&gt;dtw&lt;/a&gt; package) to
-aligned &lt;a href="http://en.wikipedia.org/wiki/Curvature#Signed_curvature"&gt;signed curvature&lt;/a&gt; of a channel. Smooth
-spline is used to derive curvature as a parametric function of
-position along the channel (from 0 to 1).
-&lt;/p&gt;
-
-&lt;p&gt;
-This is essentially an alternative to
-&lt;/p&gt;
-&lt;ul class="org-ul"&gt;
-&lt;li&gt;&lt;a href="http://www.nced.umn.edu/content/stream-restoration-toolbox"&gt;Planform Statistics&lt;/a&gt; tool
-&lt;/li&gt;
-&lt;li&gt;&amp;#x2026;
-&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class="alert alert-info"&gt;&lt;p class="alert-heading"&gt;Information&lt;/p&gt;
-
-&lt;p&gt;
-This method uses DTW that matches peaks in curvature and it &lt;b&gt;does not&lt;/b&gt;
-rely on spatial proximity. Thus erosion rates might be overestimated
-comparing to other tools.
-&lt;/p&gt;
-
-&lt;/div&gt;
-
-
-
-&lt;div class="figure"&gt;
-&lt;p&gt;&lt;img src="../../../.././posts/2015/03/channel-migration-tool/index/qgis-processing-channel_migration-demo-screenshot.jpg" alt="qgis-processing-channel_migration-demo-screenshot.jpg" width="600px" /&gt;
-&lt;/p&gt;
-&lt;p&gt;&lt;span class="figure-number"&gt;Figure 1:&lt;/span&gt; Channel migration by matching curvature&lt;/p&gt;
-&lt;/div&gt;
-
-
-&lt;div class="figure"&gt;
-&lt;p&gt;&lt;img src="../../../.././posts/2015/03/channel-migration-tool/index/qgis-processing-channel_migration-demo-screenshot-bends.jpg" alt="qgis-processing-channel_migration-demo-screenshot-bends.jpg" width="600px" /&gt;
-&lt;/p&gt;
-&lt;p&gt;&lt;span class="figure-number"&gt;Figure 2:&lt;/span&gt; Automatic meander enumeration&lt;/p&gt;
-&lt;/div&gt;
-</content></entry>
+  <link href="http://mlt.github.io/QGIS-Processing-toolsindex.xml" rel="self" />
+  <link href="http://mlt.github.io/QGIS-Processing-tools"/>
+  <updated>2015-03-19T00:28:12Z</updated>
+  <id>http://mlt.github.io/QGIS-Processing-toolsindex.xml</id>
+  
 </feed>
