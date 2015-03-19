@@ -4,8 +4,9 @@
 ##Years=number 1
 ##Migration=output vector
 ##spar=number .4
+##Curvature_multiplier=number 1e5
 #Min_curvature=number 1e-3
-##Step_pattern=string symmetricP2
+##Step_pattern=string symmetricP05
 ##Step=number 25
 
 library(dtw)
@@ -49,14 +50,15 @@ out <- lapply(seq_along(Original), function(iLine) {
     from.df <- get_curvature(from.pts)
     to.df <- get_curvature(to.pts)
 
-    # from.df <- subset(from.df, abs(Curvature) >= Min_curvature)
-    # to.df <- subset(to.df, abs(Curvature) >= Min_curvature)
-
     message('Performing alignment...')
     is.open <- FALSE
-    alignment <- dtw(from.df$Curvature, to.df$Curvature,
-                     step.pattern=eval(parse(text=Step_pattern)),#get(Step_pattern),
-                     open.begin=is.open, open.end=is.open)
+    alignment <- dtw(
+        with(from.df, data.frame(x,y,Curvature*Curvature_multiplier)),
+        with(to.df, data.frame(x,y,Curvature*Curvature_multiplier)),
+        window.type='sakoechiba',
+        window.size=if (nrow(from.df) < 50) nrow(from.df) else nrow(from.df)/10,
+        step.pattern=eval(parse(text=Step_pattern)),#get(Step_pattern),
+        open.begin=is.open, open.end=is.open)
 
     message('Generating migration lines...')
     i <- seq_along(alignment$index1)
