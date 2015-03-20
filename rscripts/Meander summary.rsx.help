@@ -1,1 +1,9 @@
-{"Meanders": "Points around maximum curvatures with summary.", "ALG_DESC": "Summarize channel migration rate per meander.", "ALG_CREATOR": "Mikhail Titov", "Migration": "Output vectors showing migration", "Enumerated": "Channel migration lines with meanders enumerated", "ALG_VERSION": "0.1", "ALG_HELP_CREATOR": "Mikhail Titov"}
+{
+  "ALG_HELP_CREATOR": "Mikhail Titov",
+  "ALG_VERSION": "0.1",
+  "Enumerated": "Channel migration lines with meanders enumerated",
+  "Migration": "Output vectors showing migration",
+  "ALG_CREATOR": "Mikhail Titov",
+  "ALG_DESC": "Summarize channel migration rate per meander.",
+  "Meanders": "Points around maximum curvatures with summary."
+}

@@ -1,1 +1,12 @@
-{"ALG_DESC": "Interpolate channel centerline (or any other line) between two banks. It can handle degenerate geometries, e.g. self intersecting, in general case.", "Bank_1": "", "ALG_CREATOR": "Mikhail Titov", "Step_pattern": "See ?dtw in R.", "Step": "How far apart you want vertices to be.", "ALG_VERSION": "0.1", "ALG_HELP_CREATOR": "Mikhail Titov", "Fraction": "Fractiong between lines. Closer to zero will produce a line closer to bank 1. Closer to 1 will produce a line close to bank 2. Can be outside of [0,1] range.", "spar": "Spline smoothing", "Centerline": "Final centerline"}
+{
+  "Centerline": "Final centerline",
+  "spar": "Spline smoothing",
+  "Fraction": "Fractiong between lines. Closer to zero will produce a line closer to bank 1. Closer to 1 will produce a line close to bank 2. Can be outside of [0,1] range.",
+  "ALG_HELP_CREATOR": "Mikhail Titov",
+  "ALG_VERSION": "0.1",
+  "Step": "How far apart you want vertices to be.",
+  "Step_pattern": "See ?dtw in R.",
+  "ALG_CREATOR": "Mikhail Titov",
+  "Bank_1": "",
+  "ALG_DESC": "Interpolate channel centerline (or any other line) between two banks. It can handle degenerate geometries, e.g. self intersecting, in general case."
+}
