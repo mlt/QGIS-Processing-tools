@@ -167,7 +167,8 @@ matrix of following distances is computed.
 <p>
 Since curvature varies a little compared to spatial coordinates
 between channel centerlines, we use such multiplier. The following
-example demonstrates its impact.
+example in Figure <a href="#fig-curvature-impact">1</a> demonstrates its impact. As can
+bee seen in subplot c), the erosion rate might be slightly underpredicted.
 </p>
 
 <div class="org-src-container">
@@ -182,26 +183,31 @@ Curvature_multiplier <span class="org-constant">&lt;-</span> 1e5
 Step <span class="org-constant">&lt;-</span> 25
 <span class="org-constant">source</span>(<span class="org-string">'~/.qgis2/processing/rscripts/Channel migration.rsx'</span>)
 <span class="org-function-name">plotResult</span> <span class="org-constant">&lt;-</span> <span class="org-keyword">function</span>() {
-  zz <span class="org-constant">&lt;-</span> subset(Migration, .35 &lt; fr_from &amp; fr_from &lt; .39, drop=<span class="org-type">TRUE</span>)
+  zz <span class="org-constant">&lt;-</span> subset(Migration, .35 &lt; fr_from &amp; fr_from &lt; .377, drop=<span class="org-type">TRUE</span>)
   plot(Original, xlim=bbox(zz)[<span class="org-string">'x'</span>,], ylim=bbox(zz)[<span class="org-string">'y'</span>,], col=<span class="org-string">'IndianRed1'</span>, lwd=2)
   lines(Final, col=<span class="org-string">'ForestGreen'</span>, lwd=2)
   <span class="org-keyword">for</span>(l <span class="org-keyword">in</span> coordinates(zz)[seq(1,length(zz),6)])
     do.call(<span class="org-string">'arrows'</span>, c(as.list(t(l[[1]])), length=.05, col=<span class="org-string">'gray30'</span>))
   grid(); axis(1); axis(2)
 }
-layout(matrix(1:2, nrow=1))
+layout(matrix(1:4, ncol=2, byrow=<span class="org-type">TRUE</span>))
 plotResult(); title(<span class="org-string">'a) downstream migration'</span>)
+both <span class="org-constant">&lt;-</span> data.frame(rate=Migration$rate, case=<span class="org-string">'a'</span>)
 Curvature_multiplier <span class="org-constant">&lt;-</span> 0
 <span class="org-constant">source</span>(<span class="org-string">'~/.qgis2/processing/rscripts/Channel migration.rsx'</span>)
 plotResult(); title(<span class="org-string">'b) lateral migration'</span>)
+both <span class="org-constant">&lt;-</span> rbind(both, data.frame(rate=Migration$rate, case=<span class="org-string">'b'</span>))
+par(mar=c(5.1,5.1,2.1,2.1))
+boxplot(rate*100~case, both, log=<span class="org-string">'y'</span>,
+        ylab=expression(<span class="org-string">'Erosion rate,'</span> ~~ cm ~~ yr^-1), main=<span class="org-string">'c) rate comparison'</span>)
 </pre>
 </div>
 
 
-<div class="figure">
+<div id="fig-curvature-impact" class="figure">
 <p><img src="../../../.././posts/2015/03/on-effect-of-curvature-multiplier/index/multiplier-effect.svg" alt="multiplier-effect.svg" />
 </p>
-<p><span class="figure-number">Figure 1:</span> Migration of a section of Minnesota River a) with curvature b) spatial proximity only</p>
+<p><span class="figure-number">Figure 1:</span> Migration of a section of Minnesota River a) with curvature b) spatial proximity only, and c) comparison of annual erosion rates</p>
 </div>
 
   </div>

@@ -3,7 +3,7 @@
   <title>QGIS processing tools</title>
   <link href="http://mlt.github.io/QGIS-Processing-toolsindex.xml" rel="self" />
   <link href="http://mlt.github.io/QGIS-Processing-tools"/>
-  <updated>2015-03-20T14:46:29Z</updated>
+  <updated>2015-03-20T18:30:41Z</updated>
   <id>http://mlt.github.io/QGIS-Processing-toolsindex.xml</id>
   <entry><title type="html">On effect of curvature multiplier</title><author><name>nil</name></author><link href="http://mlt.github.io/QGIS-Processing-tools/posts/2015/03/on-effect-of-curvature-multiplier/index.html"/><updated>2015-03-18T23:12:00Z</updated><published>2015-03-18T23:12:00Z</published><id>posts/2015/03/on-effect-of-curvature-multiplier/index.html</id><category scheme="/tags/dtw.html" term="dtw" label="dtw"/><category scheme="/tags/r.html" term="r" label="r"/><content type="html">&lt;p&gt;
 DTW alignment of original &amp;amp; final channel centerlines is performed
@@ -24,7 +24,8 @@ matrix of following distances is computed.
 &lt;p&gt;
 Since curvature varies a little compared to spatial coordinates
 between channel centerlines, we use such multiplier. The following
-example demonstrates its impact.
+example in Figure &lt;a href="#fig-curvature-impact"&gt;1&lt;/a&gt; demonstrates its impact. As can
+bee seen in subplot c), the erosion rate might be slightly underpredicted.
 &lt;/p&gt;
 
 &lt;div class="org-src-container"&gt;
@@ -39,26 +40,31 @@ Curvature_multiplier &lt;span class="org-constant"&gt;&amp;lt;-&lt;/span&gt; 1e5
 Step &lt;span class="org-constant"&gt;&amp;lt;-&lt;/span&gt; 25
 &lt;span class="org-constant"&gt;source&lt;/span&gt;(&lt;span class="org-string"&gt;'~/.qgis2/processing/rscripts/Channel migration.rsx'&lt;/span&gt;)
 &lt;span class="org-function-name"&gt;plotResult&lt;/span&gt; &lt;span class="org-constant"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="org-keyword"&gt;function&lt;/span&gt;() {
-  zz &lt;span class="org-constant"&gt;&amp;lt;-&lt;/span&gt; subset(Migration, .35 &amp;lt; fr_from &amp;amp; fr_from &amp;lt; .39, drop=&lt;span class="org-type"&gt;TRUE&lt;/span&gt;)
+  zz &lt;span class="org-constant"&gt;&amp;lt;-&lt;/span&gt; subset(Migration, .35 &amp;lt; fr_from &amp;amp; fr_from &amp;lt; .377, drop=&lt;span class="org-type"&gt;TRUE&lt;/span&gt;)
   plot(Original, xlim=bbox(zz)[&lt;span class="org-string"&gt;'x'&lt;/span&gt;,], ylim=bbox(zz)[&lt;span class="org-string"&gt;'y'&lt;/span&gt;,], col=&lt;span class="org-string"&gt;'IndianRed1'&lt;/span&gt;, lwd=2)
   lines(Final, col=&lt;span class="org-string"&gt;'ForestGreen'&lt;/span&gt;, lwd=2)
   &lt;span class="org-keyword"&gt;for&lt;/span&gt;(l &lt;span class="org-keyword"&gt;in&lt;/span&gt; coordinates(zz)[seq(1,length(zz),6)])
     do.call(&lt;span class="org-string"&gt;'arrows'&lt;/span&gt;, c(as.list(t(l[[1]])), length=.05, col=&lt;span class="org-string"&gt;'gray30'&lt;/span&gt;))
   grid(); axis(1); axis(2)
 }
-layout(matrix(1:2, nrow=1))
+layout(matrix(1:4, ncol=2, byrow=&lt;span class="org-type"&gt;TRUE&lt;/span&gt;))
 plotResult(); title(&lt;span class="org-string"&gt;'a) downstream migration'&lt;/span&gt;)
+both &lt;span class="org-constant"&gt;&amp;lt;-&lt;/span&gt; data.frame(rate=Migration$rate, case=&lt;span class="org-string"&gt;'a'&lt;/span&gt;)
 Curvature_multiplier &lt;span class="org-constant"&gt;&amp;lt;-&lt;/span&gt; 0
 &lt;span class="org-constant"&gt;source&lt;/span&gt;(&lt;span class="org-string"&gt;'~/.qgis2/processing/rscripts/Channel migration.rsx'&lt;/span&gt;)
 plotResult(); title(&lt;span class="org-string"&gt;'b) lateral migration'&lt;/span&gt;)
+both &lt;span class="org-constant"&gt;&amp;lt;-&lt;/span&gt; rbind(both, data.frame(rate=Migration$rate, case=&lt;span class="org-string"&gt;'b'&lt;/span&gt;))
+par(mar=c(5.1,5.1,2.1,2.1))
+boxplot(rate*100~case, both, log=&lt;span class="org-string"&gt;'y'&lt;/span&gt;,
+        ylab=expression(&lt;span class="org-string"&gt;'Erosion rate,'&lt;/span&gt; ~~ cm ~~ yr^-1), main=&lt;span class="org-string"&gt;'c) rate comparison'&lt;/span&gt;)
 &lt;/pre&gt;
 &lt;/div&gt;
 
 
-&lt;div class="figure"&gt;
+&lt;div id="fig-curvature-impact" class="figure"&gt;
 &lt;p&gt;&lt;img src="../../../.././posts/2015/03/on-effect-of-curvature-multiplier/index/multiplier-effect.svg" alt="multiplier-effect.svg" /&gt;
 &lt;/p&gt;
-&lt;p&gt;&lt;span class="figure-number"&gt;Figure 1:&lt;/span&gt; Migration of a section of Minnesota River a) with curvature b) spatial proximity only&lt;/p&gt;
+&lt;p&gt;&lt;span class="figure-number"&gt;Figure 1:&lt;/span&gt; Migration of a section of Minnesota River a) with curvature b) spatial proximity only, and c) comparison of annual erosion rates&lt;/p&gt;
 &lt;/div&gt;
 </content></entry>
 </feed>
