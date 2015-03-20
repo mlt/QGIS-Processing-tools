@@ -9,49 +9,56 @@
   
   <url>
     <loc>http://mlt.github.io/QGIS-Processing-tools/index.html</loc>
-    <lastmod>2015-03-19T16:09:15Z</lastmod>
+    <lastmod>2015-03-20T14:35:23Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
 <url>
     <loc>http://mlt.github.io/QGIS-Processing-tools/tags.html</loc>
-    <lastmod>2015-03-19T16:09:15Z</lastmod>
+    <lastmod>2015-03-20T14:35:23Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
 <url>
     <loc>http://mlt.github.io/QGIS-Processing-tools/changelog.html</loc>
-    <lastmod>2015-03-19T16:09:15Z</lastmod>
+    <lastmod>2015-03-20T14:35:23Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
 <url>
     <loc>http://mlt.github.io/QGIS-Processing-tools/channel-migration.html</loc>
-    <lastmod>2015-03-19T16:09:15Z</lastmod>
+    <lastmod>2015-03-20T14:35:23Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+<url>
+    <loc>http://mlt.github.io/QGIS-Processing-tools/banks2centerline.html</loc>
+    <lastmod>2015-03-20T14:35:23Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
 <url>
     <loc>http://mlt.github.io/QGIS-Processing-tools/tools.html</loc>
-    <lastmod>2015-03-19T16:09:15Z</lastmod>
+    <lastmod>2015-03-20T14:35:23Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
 <url>
     <loc>http://mlt.github.io/QGIS-Processing-tools/bug-report.html</loc>
-    <lastmod>2015-03-19T16:09:15Z</lastmod>
+    <lastmod>2015-03-20T14:35:23Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
 <url>
     <loc>http://mlt.github.io/QGIS-Processing-tools/faq.html</loc>
-    <lastmod>2015-03-19T16:09:15Z</lastmod>
+    <lastmod>2015-03-20T14:35:23Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
