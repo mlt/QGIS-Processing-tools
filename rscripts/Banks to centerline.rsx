@@ -9,8 +9,8 @@
 
 library(dtw)
 
-stopifnot(identicalCRS(Original, Final))
-stopifnot(length(Original)==length(Final))
+stopifnot(identicalCRS(Bank_1, Bank_2))
+stopifnot(length(Bank_1)==length(Bank_2))
 
 get_curvature <- function(mtx) {
     total.length <- apply(
@@ -34,13 +34,13 @@ get_curvature <- function(mtx) {
                m = m, fr = m/max(m))
 }
 
-out <- lapply(seq_along(Original), function(iLine) {
+out <- lapply(seq_along(Bank_1), function(iLine) {
     # No multipart features!
-    stopifnot(length(coordinates(Original)[[iLine]]) == 1,
-              length(coordinates(Final)[[iLine]]) == 1)
+    stopifnot(length(coordinates(Bank_1)[[iLine]]) == 1,
+              length(coordinates(Bank_2)[[iLine]]) == 1)
 
-    from.pts <- coordinates(Original)[[iLine]][[1]]
-    to.pts <- coordinates(Final)[[iLine]][[1]]
+    from.pts <- coordinates(Bank_1)[[iLine]][[1]]
+    to.pts <- coordinates(Bank_2)[[iLine]][[1]]
 
     from.df <- get_curvature(from.pts)
     to.df <- get_curvature(to.pts)
@@ -61,7 +61,7 @@ out <- lapply(seq_along(Original), function(iLine) {
                  Fraction * to.df[alignment$index2, c('x', 'y')]
              ), iLine-1)
     
-    sl <- SpatialLines(list(l), proj4string=CRS(proj4string(Original)))
+    sl <- SpatialLines(list(l), proj4string=CRS(proj4string(Bank_1)))
     SpatialLinesDataFrame(sl, data.frame(refid=iLine-1, row.names=iLine-1))
 })
 
