@@ -10,7 +10,6 @@
 ##Step=number 25
 
 library(dtw)
-library(lattice)
 
 stopifnot(identicalCRS(Original, Final))
 stopifnot(length(Original)==length(Final))
