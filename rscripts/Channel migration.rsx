@@ -55,9 +55,7 @@ out <- lapply(seq_along(Original), function(iLine) {
     alignment <- dtw(
         with(from.df, data.frame(x,y,Curvature*Curvature_multiplier)),
         with(to.df, data.frame(x,y,Curvature*Curvature_multiplier)),
-        window.type='sakoechiba',
-        window.size=if (nrow(from.df) < 50) nrow(from.df) else nrow(from.df)/10,
-        step.pattern=eval(parse(text=Step_pattern)),#get(Step_pattern),
+        step.pattern=get(Step_pattern),
         open.begin=is.open, open.end=is.open)
 
     message('Generating migration lines...')
