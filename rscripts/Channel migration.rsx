@@ -11,8 +11,9 @@
 
 library(dtw)
 
-stopifnot(identicalCRS(Original, Final))
-stopifnot(length(Original)==length(Final))
+stopifnot(!is.na(proj4string(Original)))    # projected coordinates
+stopifnot(identicalCRS(Original, Final))    # same coordinate system
+stopifnot(length(Original)==length(Final))  # same number of features, usually 1
 
 get_curvature <- function(mtx) {
     total.length <- apply(
